@@ -1,0 +1,44 @@
+@page
+@model Sales.Pages.Anuncios.AnunciosModel
+@{
+}
+
+<br>
+<h2>Lista de Anuncios</h2>
+<a class="btn btn-primary btn-sm" href="/Anuncios/Criar">Novo Anuncio</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Produto</th>
+            <th>Link</th>
+            <th>Data de Inicio</th>
+            <th>Data de Fim</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var anuncio in Model.anunciosList)
+        {
+            <tr>
+                <td>@anuncio.Id</td>
+                <td>@anuncio.Titulo</td>
+                <td>@anuncio.NomeProduto</td>
+                <td>@anuncio.Link</td>
+                <td>@anuncio.DataInicio</td>
+                @if (@anuncio.DataFim.Equals(DateOnly.FromDateTime(DateTime.MinValue.AddDays(1))))
+                {
+                    <td> </td>
+                } 
+                else 
+                {
+                    <td>@anuncio.DataFim</td>   
+                }
+                <td>
+                    <a class=" btn btn-primary btn-sm" href="/Anuncios/Editar?id=@anuncio.Id">Editar</a>
+                    <a class=" btn btn-danger btn-sm" href="/Anuncios/Remover?id=@anuncio.Id">Remover</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

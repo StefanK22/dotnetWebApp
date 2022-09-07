@@ -1,0 +1,33 @@
+@page
+@model Sales.Pages.Destaques.DestaquesModel
+@{
+}
+
+<br>
+<h2>Lista de Destaques</h2>
+<a class="btn btn-primary btn-sm" href="/Destaques/Criar">Novo Destaque</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Custo</th>
+            <th>Id do Anuncio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var destaque in Model.destaquesList)
+        {
+            <tr>
+                <td>@destaque.Id</td>
+                <td>@destaque.Tipo</td>
+                <td>@destaque.Custo</td>
+                <td>@destaque.Anuncio</td>
+                <td>
+                    <a class=" btn btn-primary btn-sm" href="/Destaques/Editar?id=@destaque.Id">Editar</a>
+                    <a class=" btn btn-danger btn-sm" href="/Destaques/Remover?id=@destaque.Id">Remover</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

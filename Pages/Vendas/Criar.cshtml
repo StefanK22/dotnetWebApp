@@ -1,0 +1,143 @@
+@page
+@using Npgsql;
+@using Sales.Pages.Compras;
+@using Sales.Pages.clientes;
+@model Sales.Pages.Vendas.CriarModel
+@{
+}
+
+<br>
+<h2>Nova Venda</h2>
+
+@if (Model.errorMessage.Length > 0) {
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<form method="post">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Compra</label>
+        <div class="col-sm-6">
+            <select name="compraId" class="form-control">
+                @{
+                    try
+                    {
+                        String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+                        List<Compra> compras = new List<Compra>();
+                        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM compra";
+                            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                            NpgsqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read()){
+                                Compra compra = new Compra();
+                                compra.Id = reader.GetInt16(0);
+                                compra.NomeProduto = reader.GetString(1);
+                                compra.Link = reader.GetString(2);
+
+                                compras.Add(compra);
+                            }
+                            connection.Close();
+                        }
+                        <option value="" disable hidden selected>Selecionar Compra</option>
+                        foreach (var compra in compras)
+                        {
+                            @if (compra.Id == @Model.venda.CompraId)
+                            {
+                                <option value="@compra.Id" selected>@compra.Id - @compra.NomeProduto - @compra.Link</option>
+                            }
+                            else
+                            {
+                                <option value="@compra.Id">@compra.Id - @compra.NomeProduto - @compra.Link</option>
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Model.errorMessage = ex.Message;
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Preço</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="preco" value="@Model.venda.Preco">
+        </div>
+    </div>    
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Data da Venda</label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" name="data" value="@Model.venda.Data">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Xliente</label>
+        <div class="col-sm-6">
+            <select name="cliente" class="form-control">
+                @{
+                    try
+                    {
+                        String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+                        List<cliente> clientes = new List<cliente>();
+                        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM cliente";
+                            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                            NpgsqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read()){
+                                cliente cliente = new cliente();
+                                cliente.Id = reader.GetInt16(0);
+                                cliente.Nome = reader.GetString(1);
+                                cliente.Email = reader.GetString(2);
+
+                                clientes.Add(cliente);
+                            }
+                            connection.Close();
+                        }
+                        <option value="" disable hidden selected>Selecionar Xliente</option>
+                        foreach (var cliente in clientes)
+                        {
+                            @if (cliente.Id == @Model.venda.cliente)
+                            {
+                                <option value="@cliente.Id" selected>@cliente.Id - @cliente.Nome - @cliente.Email</option>
+                            }
+                            else
+                            {
+                                <option value="@cliente.Id">@cliente.Id - @cliente.Nome - @cliente.Email</option>
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Model.errorMessage = ex.Message;
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    @if (Model.sucessMessage.Length > 0)
+    {
+    <div class="row mb-3">
+        <div class="col-sm-9">
+            <div class="alert alert-sucess alert-dismissible fade show" role="alert">
+                <strong>@Model.sucessMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    }
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">Submeter</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/Vendas" role="button">Cancelar</a>
+        </div>
+    </div>
+</form>

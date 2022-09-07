@@ -1,0 +1,31 @@
+﻿@page
+@using Npgsql;
+
+@{
+    try
+    {
+        int id = int.Parse(Request.Query["id"]);
+        String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+
+        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "DELETE FROM cliente WHERE id=@id";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Error: " + e.Message);
+    }
+
+    Response.Redirect("/clientes");
+}
+

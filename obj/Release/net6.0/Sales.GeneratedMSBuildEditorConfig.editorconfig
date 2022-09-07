@@ -1,0 +1,144 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Sales
+build_property.RootNamespace = Sales
+build_property.ProjectDir = /Users/stefan.d.k/Projects/Sales/Sales/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/stefan.d.k/Projects/Sales/Sales
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Anuncios/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW51bmNpb3MvQ3JpYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Anuncios/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW51bmNpb3MvRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Anuncios/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW51bmNpb3MvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Anuncios/Remover.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW51bmNpb3MvUmVtb3Zlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Clientes/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2xpZW50ZXMvQ3JpYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Clientes/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2xpZW50ZXMvRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Clientes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2xpZW50ZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Clientes/Remover.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2xpZW50ZXMvUmVtb3Zlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Compras/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcHJhcy9Dcmlhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Compras/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcHJhcy9FZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Compras/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcHJhcy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Compras/Remover.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcHJhcy9SZW1vdmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Destaques/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVzdGFxdWVzL0NyaWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Destaques/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVzdGFxdWVzL0VkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Destaques/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVzdGFxdWVzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Destaques/Remover.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVzdGFxdWVzL1JlbW92ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Produtos/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvZHV0b3MvQ3JpYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Produtos/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvZHV0b3MvRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Produtos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvZHV0b3MvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Produtos/Remover.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvZHV0b3MvUmVtb3Zlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Vendas/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmVuZGFzL0NyaWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Vendas/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmVuZGFzL0VkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Vendas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmVuZGFzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Vendas/Remover.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmVuZGFzL1JlbW92ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ca0s14fqkz

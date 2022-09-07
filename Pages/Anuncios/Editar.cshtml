@@ -1,0 +1,115 @@
+﻿@page
+@using Npgsql;
+@model Sales.Pages.Anuncios.EditarModel
+@{
+}
+
+<br>
+<h2>Editar Anuncio</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<form method="post">
+    <input type="hidden" name="id" value="@Model.anuncio.Id">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Id</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="newid" value="@Model.newId">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Titulo</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="titulo" value="@Model.anuncio.Titulo">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Produto</label>
+        <div class="col-sm-6">
+            <select name="nomeProduto" class="form-control">
+                @{
+                    try
+                    {
+                        String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+                        List<String> produtos = new List<String>();
+                        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT nome FROM produto";
+                            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                            NpgsqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                                produtos.Add(reader.GetString(0));
+                            connection.Close();
+                        }
+                        <option value="" disable hidden selected>Selecionar Produto</option>
+                        foreach (var produto in produtos)
+                        {
+                            @if (produto == @Model.anuncio.NomeProduto)
+                            {
+                                <option value="@produto" selected>@produto</option>
+                            }
+                            else 
+                            {
+                                <option value="@produto">@produto</option>
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Model.errorMessage = ex.Message;
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Link</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="link" value="@Model.anuncio.Link">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Data de Inicio</label>
+        <div class="col-sm-6">
+            <input type="text" onfocus="@Model.anuncio.DataInicio" class="form-control" name="dataInicio" value="@Model.anuncio.DataInicio">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Data de Recebimento</label>
+        <div class="col-sm-6">
+            @if (@Model.anuncio.DataFim.Equals(DateOnly.FromDateTime(DateTime.MinValue.AddDays(1))))
+            {
+                <input type="date" class="form-control" name="dataFim" value="@DateOnly.FromDateTime(DateTime.Now)">
+            } 
+            else 
+            {
+                <input type="text" class="form-control" name="dataFim" value="@Model.anuncio.DataFim">
+            }
+        </div>
+    </div>    
+    @if (Model.sucessMessage.Length > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-sucess alert-dismissible fade show" role="alert">
+                    <strong>@Model.sucessMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">Submeter</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/anuncios" role="button">Cancelar</a>
+        </div>
+    </div>
+</form>

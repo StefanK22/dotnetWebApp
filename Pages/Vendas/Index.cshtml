@@ -1,0 +1,35 @@
+@page
+@model Sales.Pages.Vendas.VendasModel
+@{
+}
+
+<br>
+<h2>Lista de Vendas</h2>
+<a class="btn btn-primary btn-sm" href="/Vendas/Criar">Nova Venda</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Id da Compra</th>
+            <th>Preço</th>
+            <th>Data da Venda</th>
+            <th>cliente</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var venda in Model.vendasList)
+        {
+            <tr>
+                <td>@venda.Id</td>
+                <td>@venda.CompraId</td>
+                <td>@venda.Preco</td>
+                <td>@venda.Data</td>
+                <td>@venda.cliente</td>
+                <td>
+                    <a class=" btn btn-primary btn-sm" href="/Vendas/Editar?id=@venda.Id">Editar</a>
+                    <a class=" btn btn-danger btn-sm" href="/Vendas/Remover?id=@venda.Id">Remover</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

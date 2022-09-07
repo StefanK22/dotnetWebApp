@@ -1,0 +1,29 @@
+﻿@page
+@model Sales.Pages.Produtos.ProdutosModel
+@{
+}
+
+<br>
+<h2>Lista de Produtos</h2>
+<a class="btn btn-primary btn-sm" href="/Produtos/Criar">Novo Produto</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var produto in Model.produtosList)
+        {
+            <tr>
+                <td>@produto.Nome</td>
+                <td>@produto.Descr</td>
+                <td>
+                    <a class=" btn btn-primary btn-sm" href="/Produtos/Editar?nome=@produto.Nome">Editar</a>
+                    <a class=" btn btn-danger btn-sm" href="/Produtos/Remover?nome=@produto.Nome">Remover</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

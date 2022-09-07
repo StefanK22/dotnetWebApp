@@ -1,0 +1,139 @@
+﻿@page
+@using Npgsql;
+@using Sales.Pages.Anuncios;
+@model Sales.Pages.Destaques.EditarModel
+@{
+}
+
+<br>
+<h2>Editar Destaque</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<form method="post">
+    <input type="hidden" name="id" value="@Model.destaque.Id">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Id</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="newid" value="@Model.newId">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Tipo</label>
+        <div class="col-sm-6">
+            <select name="tipo" class="form-control">
+                <option value="" disable hidden selected>Selecionar Tipo</option>
+                @if(Model.destaque.Tipo == "Start"){
+                    <option value="Start" selected>Start</option>
+                } else {
+                    <option value="Start">Start</option>
+                }
+                @if(Model.destaque.Tipo == "Standard"){
+                    <option value="Standard" selected>Standard</option>
+                }else {
+                    <option value="Standard">Standard</option>
+                }
+                @if(Model.destaque.Tipo == "Premium"){
+                    <option value="Premium" selected>Premium</option>
+                } else {
+                    <option value="Premium">Premium</option>
+                }
+                @if(Model.destaque.Tipo == "Para o Topo"){
+                    <option value="Para o Topo">Para o Topo</option>
+                } else {
+                    <option value="Para o Topo">Para o Topo</option>
+                }
+                @if(Model.destaque.Tipo == "Top de Anuncios 7"){
+                    <option value="Top de Anuncios 7" selected>Top de Anuncios 7</option>
+                } else {                    
+                    <option value="Top de Anuncios 7">Top de Anuncios 7</option>
+                }
+                @if(Model.destaque.Tipo == "Top de Anuncios 28"){
+                    <option value="Top de Anuncios 28" selected>Top de Anuncios 28</option>
+                } else {
+                    <option value="Top de Anuncios 28">Top de Anuncios 28</option>
+                }
+               @if(Model.destaque.Tipo == "1ª Página"){
+                    <option value="1ª Página" selected>1ª Página</option>
+                } else {
+                    <option value="1ª Página">1ª Página</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Custo</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="custo" value="@Model.destaque.Custo">
+        </div>
+    </div>     
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Anuncio</label>
+        <div class="col-sm-6">
+            <select name="anuncio" class="form-control">
+                @{
+                    try
+                    {
+                        String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+                        List<Anuncio> anuncios = new List<Anuncio>();
+                        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM anuncio";
+                            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                            NpgsqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read()){
+                                Anuncio anuncio = new Anuncio();
+                                anuncio.Id = reader.GetInt16(0);
+                                anuncio.Titulo = reader.GetString(1);
+
+                                anuncios.Add(anuncio);
+                            }
+                            connection.Close();
+                        }
+                        <option value="" disable hidden selected>Selecionar Anuncio</option>
+                        foreach (Anuncio anuncio in anuncios)
+                        {
+                            @if (anuncio.Id == @Model.destaque.Anuncio)
+                            {
+                                <option value="@anuncio.Id" selected>@anuncio.Titulo</option>
+                            }
+                            else
+                            {
+                                <option value="@anuncio.Id" selected>@anuncio.Titulo</option>
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Model.errorMessage = ex.Message;
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    @if (Model.sucessMessage.Length > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-sucess alert-dismissible fade show" role="alert">
+                    <strong>@Model.sucessMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">Submeter</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/Destaques" role="button">Cancelar</a>
+        </div>
+    </div>
+</form>

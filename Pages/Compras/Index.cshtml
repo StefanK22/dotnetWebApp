@@ -1,0 +1,44 @@
+@page
+@model Sales.Pages.Compras.ComprasModel
+@{
+}
+
+<br>
+<h2>Lista de Compras</h2>
+<a class="btn btn-primary btn-sm" href="/Compras/Criar">Nova Compra</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Link</th>
+            <th>Data da compra</th>
+            <th>Data do Recebimento</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var compra in Model.comprasList)
+        {
+            <tr>
+                <td>@compra.Id</td>
+                <td>@compra.NomeProduto</td>
+                <td>@compra.Link</td>
+                <td>@compra.DataCompra</td>
+                @if (@compra.DataRecebimento.Equals(DateOnly.FromDateTime(DateTime.MinValue.AddDays(1))))
+                {
+                    <td> </td>
+                } 
+                else 
+                {
+                    <td>@compra.DataRecebimento</td>   
+                }
+                <td>@compra.Preco</td>
+                <td>
+                    <a class=" btn btn-primary btn-sm" href="/Compras/Editar?id=@compra.Id">Editar</a>
+                    <a class=" btn btn-danger btn-sm" href="/Compras/Remover?id=@compra.Id">Remover</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

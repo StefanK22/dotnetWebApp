@@ -1,0 +1,33 @@
+﻿@page
+@model Sales.Pages.clientes.clientesModel
+@{
+}
+
+<br>
+<h2>Lista de Clientes</h2>
+<a class="btn btn-primary btn-sm" href="/clientes/Criar">Novo Cliente</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Morada</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model.clientesList)
+        {
+            <tr>
+                <td>@cliente.Id</td>
+                <td>@cliente.Nome</td>
+                <td>@cliente.Email</td>
+                <td>@cliente.Morada</td>
+                <td>
+                    <a class=" btn btn-primary btn-sm" href="/Clientes/Editar?id=@cliente.Id">Editar</a>
+                    <a class=" btn btn-danger btn-sm" href="/Clientes/Remover?id=@cliente.Id">Remover</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

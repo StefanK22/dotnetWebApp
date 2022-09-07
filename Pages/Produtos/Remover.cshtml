@@ -1,0 +1,31 @@
+﻿@page
+@using Npgsql;
+
+@{
+    try
+    {
+        string nome = Request.Query["nome"];
+        String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+
+        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "DELETE FROM produto WHERE nome=@nome";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@nome", nome);
+
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Error: " + e.Message);
+    }
+
+    Response.Redirect("/Produtos/Index");
+}
+
