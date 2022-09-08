@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AbIK9vVVeu7VSeBH2wz7+RlfOCsy9LEJRRoFNhPkC7o=",
+  "Hash": "nwjetLtanLJErHexAyzfgsRdFMSP3KRGItafaZe4niI=",
   "Source": "Sales",
   "BasePath": "_content/Sales",
   "Mode": "Default",
@@ -1069,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/stefan.d.k/Projects/Sales/Sales/obj/Debug/net6.0/scopedcss/projectbundle/Sales.bundle.scp.css"
+    },
+    {
+      "Identity": "/Users/stefan.d.k/Projects/Sales/Sales/wwwroot/css/forms.css",
+      "SourceId": "Sales",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/stefan.d.k/Projects/Sales/Sales/wwwroot/",
+      "BasePath": "_content/Sales",
+      "RelativePath": "css/forms.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/forms.css"
     },
     {
       "Identity": "/Users/stefan.d.k/Projects/Sales/Sales/wwwroot/css/site.css",

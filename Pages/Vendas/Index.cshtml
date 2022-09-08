@@ -3,31 +3,94 @@
 @{
 }
 
+<head>
+    <style>
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .content-table thead tr {
+            background-color: #14a387;
+            color: #FFFFFF;
+            text-align: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
+
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        tr:hover {
+            background-color: #e8e8e8;
+        }
+        .close-button {
+            cursor: pointer;
+            color: red;
+            transform: translate(0%, -50%);
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .close-button:hover {
+            background: #bbb;
+            color: black;
+        }
+        .btn-primary {
+            background-color: #14a387;
+            border: 1px solid white;
+        }
+        .btn-primary:hover {
+            background-color: #0f7f69;
+            border: 1px solid white;
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+
+            rows.forEach((row) => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+</head>
+
 <br>
 <h2>Lista de Vendas</h2>
 <a class="btn btn-primary btn-sm" href="/Vendas/Criar">Nova Venda</a>
-<table class="table">
+<table class="content-table">
     <thead>
         <tr>
             <th>ID</th>
             <th>Id da Compra</th>
             <th>Preço</th>
             <th>Data da Venda</th>
-            <th>cliente</th>
+            <th>Cliente</th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var venda in Model.vendasList)
         {
-            <tr>
+            <tr data-href="/Vendas/Editar?id=@venda.Id">
+
                 <td>@venda.Id</td>
                 <td>@venda.CompraId</td>
                 <td>@venda.Preco</td>
                 <td>@venda.Data</td>
                 <td>@venda.cliente</td>
                 <td>
-                    <a class=" btn btn-primary btn-sm" href="/Vendas/Editar?id=@venda.Id">Editar</a>
-                    <a class=" btn btn-danger btn-sm" href="/Vendas/Remover?id=@venda.Id">Remover</a>
+                    <a class="close-button" href="/Vendas/Remover?id=@venda.Id">X</a>
                 </td>
             </tr>
         }

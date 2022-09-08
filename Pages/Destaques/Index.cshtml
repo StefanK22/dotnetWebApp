@@ -3,29 +3,91 @@
 @{
 }
 
+<head>
+    <style>
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .content-table thead tr {
+            background-color: #14a387;
+            color: #FFFFFF;
+            text-align: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
+
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        tr:hover {
+            background-color: #e8e8e8;
+        }
+        .close-button {
+            cursor: pointer;
+            color: red;
+            transform: translate(0%, -50%);
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .close-button:hover {
+            background: #bbb;
+            color: black;
+        }
+        .btn-primary {
+            background-color: #14a387;
+            border: 1px solid white;
+        }
+        .btn-primary:hover {
+            background-color: #0f7f69;
+            border: 1px solid white;
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+
+            rows.forEach((row) => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+</head>
+
 <br>
 <h2>Lista de Destaques</h2>
 <a class="btn btn-primary btn-sm" href="/Destaques/Criar">Novo Destaque</a>
-<table class="table">
+<table class="content-table">
     <thead>
         <tr>
             <th>ID</th>
             <th>Tipo</th>
             <th>Custo</th>
             <th>Id do Anuncio</th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var destaque in Model.destaquesList)
         {
-            <tr>
+            <tr data-href="/Destaques/Editar?id=@destaque.Id">
                 <td>@destaque.Id</td>
                 <td>@destaque.Tipo</td>
                 <td>@destaque.Custo</td>
                 <td>@destaque.Anuncio</td>
                 <td>
-                    <a class=" btn btn-primary btn-sm" href="/Destaques/Editar?id=@destaque.Id">Editar</a>
-                    <a class=" btn btn-danger btn-sm" href="/Destaques/Remover?id=@destaque.Id">Remover</a>
+                    <a class="close-button" href="/Destaques/Remover?id=@destaque.Id">X</a>
                 </td>
             </tr>
         }

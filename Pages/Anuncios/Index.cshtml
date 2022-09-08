@@ -3,10 +3,73 @@
 @{
 }
 
+<head>
+    <style>
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .content-table thead tr {
+            background-color: #14a387;
+            color: #FFFFFF;
+            text-align: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
+
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        tr:hover {
+            background-color: #e8e8e8;
+        }
+        .close-button {
+            cursor: pointer;
+            color: red;
+            transform: translate(0%, -50%);
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .close-button:hover {
+            background: #bbb;
+            color: black;
+        }
+        .btn-primary {
+            background-color: #14a387;
+            border: 1px solid white;
+        }
+        .btn-primary:hover {
+            background-color: #0f7f69;
+            border: 1px solid white;
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+
+            rows.forEach((row) => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+</head>
+
 <br>
 <h2>Lista de Anuncios</h2>
 <a class="btn btn-primary btn-sm" href="/Anuncios/Criar">Novo Anuncio</a>
-<table class="table">
+
+<table class="content-table">
     <thead>
         <tr>
             <th>ID</th>
@@ -15,16 +78,17 @@
             <th>Link</th>
             <th>Data de Inicio</th>
             <th>Data de Fim</th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var anuncio in Model.anunciosList)
         {
-            <tr>
+            <tr data-href="/Anuncios/Editar?id=@anuncio.Id">
                 <td>@anuncio.Id</td>
                 <td>@anuncio.Titulo</td>
                 <td>@anuncio.NomeProduto</td>
-                <td>@anuncio.Link</td>
+                <td>@anuncio.Link.Substring(0, 30)</td>
                 <td>@anuncio.DataInicio</td>
                 @if (@anuncio.DataFim.Equals(DateOnly.FromDateTime(DateTime.MinValue.AddDays(1))))
                 {
@@ -35,8 +99,7 @@
                     <td>@anuncio.DataFim</td>   
                 }
                 <td>
-                    <a class=" btn btn-primary btn-sm" href="/Anuncios/Editar?id=@anuncio.Id">Editar</a>
-                    <a class=" btn btn-danger btn-sm" href="/Anuncios/Remover?id=@anuncio.Id">Remover</a>
+                    <a class="close-button" href="/Anuncios/Remover?id=@anuncio.Id">X</a>
                 </td>
             </tr>
         }

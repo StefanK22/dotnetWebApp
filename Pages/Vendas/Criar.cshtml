@@ -6,6 +6,33 @@
 @{
 }
 
+<head>
+   <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #14a387;
+            border-color: #14a387;
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #129379;
+            border-color: #10836c;
+        }
+
+        .btn-outline-primary {
+            color: #14a387;
+            border-color: #14a387;
+        }
+
+        .btn-outline-primary:hover {
+            color: #fff;
+            background-color: #14a387;
+            border-color: #14a387;
+        }
+    </style>
+</head>
+
 <br>
 <h2>Nova Venda</h2>
 
@@ -75,7 +102,7 @@
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Xliente</label>
+        <label class="col-sm-3 col-form-label">Cliente</label>
         <div class="col-sm-6">
             <select name="cliente" class="form-control">
                 @{
@@ -99,7 +126,7 @@
                             }
                             connection.Close();
                         }
-                        <option value="" disable hidden selected>Selecionar Xliente</option>
+                        <option value="" disable hidden selected>Selecionar Cliente</option>
                         foreach (var cliente in clientes)
                         {
                             @if (cliente.Id == @Model.venda.cliente)

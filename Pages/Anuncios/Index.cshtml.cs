@@ -21,7 +21,6 @@ namespace Sales.Pages.Anuncios
             {
 
                 String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
-
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
