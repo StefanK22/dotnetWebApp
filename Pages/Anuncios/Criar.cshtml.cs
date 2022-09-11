@@ -95,7 +95,6 @@ namespace Sales.Pages.Anuncios
             anuncio.DataFim = DateOnly.FromDateTime(DateTime.Now);
             sucessMessage = "Novo Anuncio adicionado com sucesso";
 
-            System.Threading.Thread.Sleep(1000);
             Response.Redirect("/Anuncios/Index");
         }
     }

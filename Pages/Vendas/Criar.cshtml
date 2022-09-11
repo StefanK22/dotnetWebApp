@@ -129,7 +129,7 @@
                         <option value="" disable hidden selected>Selecionar Cliente</option>
                         foreach (var cliente in clientes)
                         {
-                            @if (cliente.Id == @Model.venda.cliente)
+                            @if (cliente.Id == @Model.venda.Cliente)
                             {
                                 <option value="@cliente.Id" selected>@cliente.Id - @cliente.Nome - @cliente.Email</option>
                             }
@@ -145,6 +145,12 @@
                     }
                 }
             </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Detalhes</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="detalhes" value="@Model.venda.Detalhes">
         </div>
     </div>
 

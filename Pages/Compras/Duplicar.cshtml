@@ -1,0 +1,68 @@
+﻿@page
+@using Npgsql;
+
+@{
+    try
+    {
+        Compra compra = new Compra();
+        int id = int.Parse(Request.Query["id"]);
+        String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+
+        using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+        {
+            String sql = "SELECT * FROM compra WHERE id=@id";
+
+            connection.Open();
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                NpgsqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    compra.Id = reader.GetInt16(0);
+                    compra.NomeProduto = reader.GetString(1);
+                    compra.Link = reader.GetString(2);
+                    compra.DataCompra = (DateOnly) reader.GetDate(3);
+                    compra.DataRecebimento = (DateOnly) reader.GetDate(4);
+                    compra.Preco = reader.GetDouble(5);
+                }
+            }
+            connection.Close();
+            connection.Open();
+
+            id = 2;
+            sql = "SELECT id FROM compra WHERE id >= ALL(SELECT id FROM compra)";
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        id = reader.GetInt16(0) + 1;
+                    connection.Close();
+                }
+            }
+            connection.Open();
+            sql = "INSERT INTO compra " + "(id, nome_produto, link, data_compra, data_recebimento, preco) VALUES "
+                + "(@id, @produto, @link, @data_c, @data_r, @preco);";
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@produto", compra.NomeProduto);
+                command.Parameters.AddWithValue("@link", compra.Link);
+                command.Parameters.AddWithValue("@data_c", compra.DataCompra);
+                command.Parameters.AddWithValue("@data_r", compra.DataRecebimento);
+                command.Parameters.AddWithValue("@preco", compra.Preco);
+
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Error: " + e.Message);
+    }
+
+    Response.Redirect("/Compras");
+}

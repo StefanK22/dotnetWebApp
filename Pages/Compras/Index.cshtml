@@ -50,6 +50,17 @@
             background-color: #0f7f69;
             border: 1px solid white;
         }
+        .btn-default {
+            cursor: pointer;
+            color: blue;
+            transform: translate(0%, -50%);
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .btn-default:hover {
+            background: #bbb;
+            color: black;
+        }
 
     </style>
     <script>
@@ -78,6 +89,7 @@
             <th>Data do Recebimento</th>
             <th>Preço</th>
             <th> </th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>
@@ -86,7 +98,14 @@
             <tr data-href="/Compras/Editar?id=@compra.Id">
                 <td>@compra.Id</td>
                 <td>@compra.NomeProduto</td>
-                <td>@compra.Link</td>
+                @if (compra.Link.Length >= 30)
+                {
+                    <td>@compra.Link.Substring(0, 30)</td>
+                }
+                else 
+                {
+                    <td>@compra.Link</td>
+                }
                 <td>@compra.DataCompra</td>
                 @if (@compra.DataRecebimento.Equals(DateOnly.FromDateTime(DateTime.MinValue.AddDays(1))))
                 {
@@ -97,6 +116,9 @@
                     <td>@compra.DataRecebimento</td>   
                 }
                 <td>@compra.Preco</td>
+                <td>
+                    <a class="btn-default" href="/Compras/Duplicar?id=@compra.Id">+</a>
+                </td>
                 <td>
                     <a class="close-button" href="/Compras/Remover?id=@compra.Id">X</a>
                 </td>

@@ -31,9 +31,10 @@ namespace Sales.Pages.Vendas
             try
             {                          
                 venda.CompraId = int.Parse(Request.Form["compraId"]);
-                venda.cliente = int.Parse(Request.Form["cliente"]);
+                venda.Cliente = int.Parse(Request.Form["cliente"]);
                 string preco = Request.Form["preco"];
                 venda.Preco = double.Parse(preco.Replace(".", ","));
+                venda.Detalhes = Request.Form["detalhes"];
                 if (Request.Form["data"] == "")
                 {
                     errorMessage = "A data de compra é obrigatória.";
@@ -41,7 +42,7 @@ namespace Sales.Pages.Vendas
                 } else
                     venda.Data = DateOnly.Parse(Request.Form["data"]);
 
-                if (venda.CompraId == 0 || venda.cliente == 0 || venda.Preco == 0)
+                if (venda.CompraId == 0 || venda.Cliente == 0 || venda.Preco == 0)
                 {
                     errorMessage = "Todos os campos são obrigatórios.";
                     return;
@@ -60,15 +61,16 @@ namespace Sales.Pages.Vendas
                         id = reader.GetInt16(0) + 1;
                     connection.Close();
                     connection.Open();
-                    string sql = "INSERT INTO venda " + "(id, id_compra, preco, data_venda, cliente) VALUES "
-                     + "(@id, @compraId, @preco, @data, @cliente);";
+                    string sql = "INSERT INTO venda " + "(id, id_compra, preco, data_venda, cliente, detalhes) VALUES "
+                     + "(@id, @compraId, @preco, @data, @cliente, @detalhes);";
                     using (command = new NpgsqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@id", id);
                         command.Parameters.AddWithValue("@compraId", venda.CompraId);
                         command.Parameters.AddWithValue("@preco", venda.Preco);
                         command.Parameters.AddWithValue("@data", venda.Data);
-                        command.Parameters.AddWithValue("@cliente", venda.cliente);
+                        command.Parameters.AddWithValue("@cliente", venda.Cliente);
+                        command.Parameters.AddWithValue("@detalhes", venda.Detalhes);
 
                         command.ExecuteNonQuery();
                     }
@@ -84,7 +86,8 @@ namespace Sales.Pages.Vendas
             venda.CompraId = 0;
             venda.Preco = 0;
             venda.Data = DateOnly.FromDateTime(DateTime.Now);
-            venda.cliente = 0;
+            venda.Cliente = 0;
+            venda.Detalhes = "";
             sucessMessage = "Nova Compra adicionado com sucesso";
 
             Response.Redirect("/Vendas/Index");

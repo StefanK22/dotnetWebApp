@@ -35,7 +35,7 @@ namespace Sales.Pages.Vendas
                         venda.CompraId = reader.GetInt16(1);
                         venda.Preco = reader.GetDouble(2);
                         venda.Data = (DateOnly) reader.GetDate(3);
-                        venda.cliente = reader.GetInt16(4);
+                        venda.Cliente = reader.GetInt16(4);
                         
                         vendasList.Add(venda);
                     }
@@ -56,6 +56,7 @@ namespace Sales.Pages.Vendas
         public int CompraId;
         public double Preco;
         public DateOnly Data;
-        public int cliente;
+        public int Cliente;
+        public string Detalhes;
     }
 }

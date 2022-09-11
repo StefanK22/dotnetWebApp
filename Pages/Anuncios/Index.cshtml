@@ -88,7 +88,14 @@
                 <td>@anuncio.Id</td>
                 <td>@anuncio.Titulo</td>
                 <td>@anuncio.NomeProduto</td>
-                <td>@anuncio.Link.Substring(0, 30)</td>
+                @if (anuncio.Link.Length >= 30)
+                {
+                    <td>@anuncio.Link.Substring(0, 30)</td>
+                }
+                else 
+                {
+                    <td>@anuncio.Link</td>
+                }
                 <td>@anuncio.DataInicio</td>
                 @if (@anuncio.DataFim.Equals(DateOnly.FromDateTime(DateTime.MinValue.AddDays(1))))
                 {

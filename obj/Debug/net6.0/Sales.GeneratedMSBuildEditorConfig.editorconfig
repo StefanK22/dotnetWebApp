@@ -55,6 +55,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcHJhcy9Dcmlhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/stefan.d.k/Projects/Sales/Sales/Pages/Compras/Duplicar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcHJhcy9EdXBsaWNhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/stefan.d.k/Projects/Sales/Sales/Pages/Compras/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcHJhcy9FZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

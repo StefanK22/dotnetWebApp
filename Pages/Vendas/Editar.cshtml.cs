@@ -38,7 +38,8 @@ namespace Sales.Pages.Vendas
                             venda.CompraId = reader.GetInt16(1);
                             venda.Preco = reader.GetDouble(2);
                             venda.Data = (DateOnly) reader.GetDate(3);
-                            venda.cliente = reader.GetInt16(4);
+                            venda.Cliente = reader.GetInt16(4);
+                            venda.Detalhes = reader.GetString(5);
                         }
                     }
                     connection.Close();
@@ -57,9 +58,10 @@ namespace Sales.Pages.Vendas
                 venda.Id = int.Parse(Request.Form["id"]);
                 newId = int.Parse(Request.Form["newId"]);
                 venda.CompraId = int.Parse(Request.Form["compraId"]);
-                venda.cliente = int.Parse(Request.Form["cliente"]);
+                venda.Cliente = int.Parse(Request.Form["cliente"]);
                 string preco = Request.Form["preco"];
                 venda.Preco = double.Parse(preco.Replace(".", ","));
+                venda.Detalhes = Request.Form["detalhes"];
                 if (Request.Form["data"] == "")
                 {
                     errorMessage = "A data de venda é obrigatória.";
@@ -67,7 +69,7 @@ namespace Sales.Pages.Vendas
                 } else
                     venda.Data = DateOnly.Parse(Request.Form["data"]);
 
-                if (venda.CompraId == 0 || venda.cliente == 0 || venda.Preco == 0)
+                if (venda.CompraId == 0 || venda.Cliente == 0 || venda.Preco == 0)
                 {
                     errorMessage = "Todos os campos são obrigatórios.";
                     return;
@@ -80,7 +82,7 @@ namespace Sales.Pages.Vendas
                 {
                     connection.Open();
                     String sql = "UPDATE venda " +
-                                 "SET id=@newid, id_compra=@compra, preco=@preco, data_venda=@data, cliente=@cliente " +
+                                 "SET id=@newid, id_compra=@compra, preco=@preco, data_venda=@data, cliente=@cliente, detalhes=@detalhes " +
                                  "WHERE id=@id";
                     using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
                     {
@@ -89,7 +91,8 @@ namespace Sales.Pages.Vendas
                         command.Parameters.AddWithValue("@compra", venda.CompraId);
                         command.Parameters.AddWithValue("@preco", venda.Preco);
                         command.Parameters.AddWithValue("@data", venda.Data);
-                        command.Parameters.AddWithValue("@cliente", venda.cliente);
+                        command.Parameters.AddWithValue("@cliente", venda.Cliente);
+                        command.Parameters.AddWithValue("@detalhes", venda.Detalhes);
 
                         command.ExecuteNonQuery();
                     }
