@@ -5,6 +5,7 @@
     try
     {
         Compra compra = new Compra();
+        bool showAll = bool.Parse(Request.Query["showAll"]);
         int id = int.Parse(Request.Query["id"]);
         String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
 
@@ -58,11 +59,14 @@
             connection.Close();
 
         }
+        if (showAll)
+            Response.Redirect("/Compras/Index?showAll=true");
+        else
+            Response.Redirect("/Compras/Index?showAll=false");
     }
     catch (Exception e)
     {
         Console.WriteLine("Error: " + e.Message);
     }
 
-    Response.Redirect("/Compras");
 }

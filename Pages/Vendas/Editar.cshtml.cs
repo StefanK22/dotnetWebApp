@@ -69,7 +69,7 @@ namespace Sales.Pages.Vendas
                 } else
                     venda.Data = DateOnly.Parse(Request.Form["data"]);
 
-                if (venda.CompraId == 0 || venda.Cliente == 0 || venda.Preco == 0)
+                if (venda.CompraId == 0 || venda.Cliente == 0)
                 {
                     errorMessage = "Todos os campos são obrigatórios.";
                     return;

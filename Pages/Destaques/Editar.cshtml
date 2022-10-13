@@ -128,11 +128,11 @@
                         {
                             @if (anuncio.Id == @Model.destaque.Anuncio)
                             {
-                                <option value="@anuncio.Id" selected>@anuncio.Titulo</option>
+                                <option value="@anuncio.Id" selected>@anuncio.Id - @anuncio.Titulo</option>
                             }
                             else
                             {
-                                <option value="@anuncio.Id" selected>@anuncio.Titulo</option>
+                                <option value="@anuncio.Id">@anuncio.Id - @anuncio.Titulo</option>
                             }
                         }
                     }

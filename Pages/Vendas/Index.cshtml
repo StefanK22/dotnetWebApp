@@ -67,7 +67,9 @@
 
 <br>
 <h2>Lista de Vendas</h2>
-<a class="btn btn-primary btn-sm" href="/Vendas/Criar">Nova Venda</a>
+<a class="btn btn-primary btn-sm" href="/Vendas/Criar">Nova Venda</a><br></br>
+<label for="vendasTotal">Total ganho em Vendas: </label>
+<input type="text" size="8" style="text-align: center; background-color: #e8e8e8;" id="vendasTotal" name="vendasTotal" value="@Model.Total" disabled>
 <table class="content-table">
     <thead>
         <tr>
@@ -86,9 +88,9 @@
 
                 <td>@venda.Id</td>
                 <td>@venda.CompraId</td>
-                <td>@venda.Preco</td>
+                <td>@venda.Preco€</td>
                 <td>@venda.Data</td>
-                <td>@venda.Cliente</td>
+                <td>@venda.NomeCliente</td>
                 <td>
                     <a class="close-button" href="/Vendas/Remover?id=@venda.Id">X</a>
                 </td>

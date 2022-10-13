@@ -61,7 +61,15 @@
             background: #bbb;
             color: black;
         }
-
+        .red {
+            background-color: #ffb5b5;
+        }
+        .red:hover {
+            background-color: #ffb5b5;
+        }
+        .button1 {
+            float: right;
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -78,7 +86,17 @@
 
 <br>
 <h2>Lista de Compras</h2>
-<a class="btn btn-primary btn-sm" href="/Compras/Criar">Nova Compra</a>
+
+<a class="btn btn-primary btn-sm" href="/Compras/Criar?showAll=@Model.showAll">Nova Compra</a><br></br>
+<label for="comprasTotal">Total gasto em Compras: </label>
+<input type="text" size="8" style="text-align: center; background-color: #e8e8e8;" id="comprasTotal" name="comprasTotal" value="@Model.Total" disabled><br></br>
+@if(@Model.showAll)
+{
+    <a class="btn btn-primary btn-sm button1" href="/Compras/Index?showAll=false">Ocultar Compras vendidas</a>
+} else 
+{
+    <a class="btn btn-primary btn-sm button1" href="/Compras/Index?showAll=true">Mostrar Compras vendidas</a>
+}
 <table class="content-table">
     <thead>
         <tr>
@@ -95,7 +113,12 @@
     <tbody>
         @foreach (var compra in Model.comprasList)
         {
-            <tr data-href="/Compras/Editar?id=@compra.Id">
+            string class_string = "";
+            @if(Model.soldList.Contains(compra.Id))
+            {
+                class_string = "red";
+            }
+            <tr class="@class_string" data-href="/Compras/Editar?id=@compra.Id&showAll=@Model.showAll">
                 <td>@compra.Id</td>
                 <td>@compra.NomeProduto</td>
                 @if (compra.Link.Length >= 30)
@@ -115,14 +138,16 @@
                 {
                     <td>@compra.DataRecebimento</td>   
                 }
-                <td>@compra.Preco</td>
+                <td>@compra.Preco€</td>
                 <td>
-                    <a class="btn-default" href="/Compras/Duplicar?id=@compra.Id">+</a>
+                    <a class="btn-default" href="/Compras/Duplicar?id=@compra.Id&showAll=@Model.showAll">+</a>
                 </td>
                 <td>
-                    <a class="close-button" href="/Compras/Remover?id=@compra.Id">X</a>
+                    <a class="close-button" href="/Compras/Remover?id=@compra.Id&showAll=@Model.showAll">X</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+

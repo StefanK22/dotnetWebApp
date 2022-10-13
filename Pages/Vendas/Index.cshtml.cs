@@ -14,6 +14,7 @@ namespace Sales.Pages.Vendas
     {
 
         public List<Venda> vendasList = new List<Venda>();
+        public string Total;
 
         public void OnGet()
         {
@@ -25,9 +26,25 @@ namespace Sales.Pages.Vendas
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM venda ORDER BY Id";
+                    string sql = "SELECT SUM(preco) FROM venda;";
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        try
+                        {
+                            Total = reader.GetDouble(0).ToString() + "€";
+                        }
+                        catch (System.Exception)
+                        {
+                            Total = "0.00€";   
+                        }
+                    }
+                    connection.Close();
+                    connection.Open();
+                    sql = "SELECT * FROM venda JOIN cliente ON venda.cliente=cliente.id ORDER BY venda.Id";
+                    command = new NpgsqlCommand(sql, connection);
+                    reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         Venda venda = new Venda();
@@ -36,6 +53,7 @@ namespace Sales.Pages.Vendas
                         venda.Preco = reader.GetDouble(2);
                         venda.Data = (DateOnly) reader.GetDate(3);
                         venda.Cliente = reader.GetInt16(4);
+                        venda.NomeCliente = reader.GetString(7);
                         
                         vendasList.Add(venda);
                     }
@@ -45,7 +63,7 @@ namespace Sales.Pages.Vendas
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.ToString());
+                Console.WriteLine("Exception: " + ex.Message);
             }
         }
     }
@@ -57,6 +75,7 @@ namespace Sales.Pages.Vendas
         public double Preco;
         public DateOnly Data;
         public int Cliente;
+        public string NomeCliente;
         public string Detalhes;
     }
 }

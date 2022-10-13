@@ -12,11 +12,13 @@ namespace Sales.Pages.Compras
     {
         public Compra compra = new Compra();
         public int newId = 0;
+        public bool showAll;
         public String errorMessage = "";
         public String sucessMessage = "";
         public void OnGet()
         {
             int id = int.Parse(Request.Query["id"]);
+            showAll = bool.Parse(Request.Query["showAll"]);
 
             try
             {
@@ -55,6 +57,7 @@ namespace Sales.Pages.Compras
         {
             try
             {
+                showAll = bool.Parse(Request.Query["showAll"]);
                 compra.Id = int.Parse(Request.Form["id"]);
                 newId = int.Parse(Request.Form["newId"]);
                 compra.NomeProduto = Request.Form["nomeProduto"];
@@ -112,7 +115,10 @@ namespace Sales.Pages.Compras
             }
 
             sucessMessage = "Compra editada com sucesso";
-            Response.Redirect("/Compras/Index");
+            if (showAll)
+                Response.Redirect("/Compras/Index?showAll=true");
+            else
+                Response.Redirect("/Compras/Index?showAll=false");
         }
     }
 }

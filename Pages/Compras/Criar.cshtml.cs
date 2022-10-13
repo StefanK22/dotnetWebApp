@@ -11,6 +11,7 @@ namespace Sales.Pages.Compras
     public class CriarModel : PageModel
     {
         public Compra compra = new Compra();
+        public bool showAll;
         public String errorMessage = "";
         public String sucessMessage = "";
 
@@ -18,6 +19,7 @@ namespace Sales.Pages.Compras
         {
             try
             {
+                showAll = bool.Parse(Request.Query["showAll"]);
                 compra.DataCompra = DateOnly.FromDateTime(DateTime.Now);
                 compra.DataRecebimento = DateOnly.FromDateTime(DateTime.Now);
             }
@@ -30,7 +32,8 @@ namespace Sales.Pages.Compras
         public void OnPost()
         {          
             try
-            {                          
+            {    
+                showAll = bool.Parse(Request.Query["showAll"]);
                 compra.NomeProduto = Request.Form["nomeProduto"];
                 compra.Link = Request.Form["link"];
                 string preco = Request.Form["preco"];
@@ -96,7 +99,10 @@ namespace Sales.Pages.Compras
             compra.Preco = 0.00;
             sucessMessage = "Nova Compra adicionado com sucesso";
 
-            Response.Redirect("/Compras/Index");
+            if (showAll)
+                Response.Redirect("/Compras/Index?showAll=true");
+            else
+                Response.Redirect("/Compras/Index?showAll=false");
         }
     }
 }

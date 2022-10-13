@@ -1,10 +1,38 @@
 ﻿@page
 @model Sales.Pages.clientes.EditarModel
+@using Sales.Pages.Vendas
+@using Npgsql;
 @{
 }
 
 <head>
    <style>
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .content-table thead tr {
+            background-color: #14a387;
+            color: #FFFFFF;
+            text-align: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
+
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        tr:hover {
+            background-color: #e8e8e8;
+        }
         .btn-primary {
             color: #fff;
             background-color: #14a387;
@@ -85,4 +113,48 @@
             <a class="btn btn-outline-primary" href="/clientes" role="button">Cancelar</a>
         </div>
     </div>
-</form>
+</form><br></br>
+<span style="font-size: 32px;">Vendas do Cliente:</span>
+<input type="text" size="8" style="text-align: center; background-color: #e8e8e8;" value="@Model.TotalVendas€" disabled>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Id da Compra</th>
+            <th>Preço</th>
+            <th>Data da Venda</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            String connectionString = "Server=localhost; Database=stefan.d.k; User ID=stefan.d.k";
+            List<Venda> vendas = new List<Venda>();
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM venda JOIN cliente ON venda.cliente=cliente.id WHERE cliente = @id ORDER BY venda.Id";
+                    NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@id", Model.oldId);
+                    NpgsqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()){
+                        Venda venda = new Venda();
+                        venda.Id = reader.GetInt16(0);
+                        venda.CompraId = reader.GetInt16(1);
+                        venda.Preco = reader.GetDouble(2);
+                        venda.Data = (DateOnly) reader.GetDate(3);
+
+                        vendas.Add(venda);
+                    }
+                    connection.Close();
+                }
+            foreach (Venda venda in vendas)
+            {
+                <tr data-href="/Vendas/Editar?id=@venda.Id">
+                    <td>@venda.Id</td>
+                    <td>@venda.CompraId</td>
+                    <td>@venda.Preco€</td>
+                    <td>@venda.Data</td>
+                </tr>
+            }
+        }
+    </tbody>

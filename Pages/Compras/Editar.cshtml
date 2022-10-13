@@ -120,6 +120,7 @@
             <input type="text" class="form-control" name="preco" value="@Model.compra.Preco">
         </div>
     </div>
+    
     @if (Model.sucessMessage.Length > 0)
     {
         <div class="row mb-3">
@@ -136,7 +137,7 @@
             <button type="submit" class="btn btn-primary">Submeter</button>
         </div>
         <div class="col-sm-3 d-grid">
-            <a class="btn btn-outline-primary" href="/compras" role="button">Cancelar</a>
+            <a class="btn btn-outline-primary" href="/Compras/Index?showAll=@Model.showAll" role="button">Cancelar</a>
         </div>
     </div>
 </form>

@@ -67,7 +67,9 @@
 
 <br>
 <h2>Lista de Destaques</h2>
-<a class="btn btn-primary btn-sm" href="/Destaques/Criar">Novo Destaque</a>
+<a class="btn btn-primary btn-sm" href="/Destaques/Criar">Novo Destaque</a><br></br>
+<label for="destaquesTotal">Total gasto em Destaques: </label>
+<input type="text" size="8" style="text-align: center; background-color: #e8e8e8;" id="destaquesTotal" name="destaquesTotal" value="@Model.Total" disabled>
 <table class="content-table">
     <thead>
         <tr>
@@ -84,7 +86,7 @@
             <tr data-href="/Destaques/Editar?id=@destaque.Id">
                 <td>@destaque.Id</td>
                 <td>@destaque.Tipo</td>
-                <td>@destaque.Custo</td>
+                <td>@destaque.Custo€</td>
                 <td>@destaque.Anuncio</td>
                 <td>
                     <a class="close-button" href="/Destaques/Remover?id=@destaque.Id">X</a>

@@ -23,7 +23,7 @@ namespace Sales.Pages.clientes
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM cliente ORDER BY Id";
+                    string sql = "SELECT * FROM cliente FULL OUTER JOIN (SELECT cliente, SUM(preco) AS vendas FROM venda GROUP BY cliente) AS c ON c.cliente = cliente.id ORDER BY id";
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
@@ -33,6 +33,12 @@ namespace Sales.Pages.clientes
                         cliente.Nome = reader.GetString(1);
                         cliente.Email = reader.GetString(2);
                         cliente.Morada = reader.GetString(3);
+                        try {
+                            cliente.Vendas = reader.GetDouble(5);
+                        } catch (Exception e){
+                            cliente.Vendas = 0;
+                        }
+
 
                         clientesList.Add(cliente);
                     }
@@ -53,5 +59,6 @@ namespace Sales.Pages.clientes
         public String Nome;
         public String Email;
         public String Morada;
+        public double Vendas;
     }
 }

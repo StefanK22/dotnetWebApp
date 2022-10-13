@@ -12,6 +12,8 @@ namespace Sales.Pages.clientes
     {
         public cliente cliente = new cliente();
         public int newId = 0;
+        public int oldId;
+        public double TotalVendas = 0;
         public String errorMessage = "";
         public String sucessMessage = "";
 
@@ -26,7 +28,7 @@ namespace Sales.Pages.clientes
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT * FROM cliente WHERE Id = @id";
+                    String sql = "SELECT * FROM cliente FULL OUTER JOIN (SELECT cliente, SUM(preco) AS vendas FROM venda GROUP BY cliente) AS c ON c.cliente = cliente.id WHERE cliente.Id = @id";
 
                     using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
                     {
@@ -36,9 +38,16 @@ namespace Sales.Pages.clientes
                         {
                             cliente.Id = reader.GetInt16(0);
                             newId = cliente.Id;
+                            oldId = cliente.Id;
                             cliente.Nome = reader.GetString(1);
                             cliente.Email = reader.GetString(2);
                             cliente.Morada = reader.GetString(3);
+                            try {
+                                cliente.Vendas = reader.GetDouble(5);
+                                TotalVendas += cliente.Vendas;
+                            } catch (Exception e){
+                                cliente.Vendas = 0;
+                            }
 
                         }
                     }
@@ -55,6 +64,7 @@ namespace Sales.Pages.clientes
         {
             cliente.Id = int.Parse(Request.Form["id"]);
             newId = int.Parse(Request.Form["newId"]);
+            oldId = cliente.Id;
             cliente.Nome = Request.Form["nome"];
             cliente.Email = Request.Form["email"];
             cliente.Morada = Request.Form["morada"];

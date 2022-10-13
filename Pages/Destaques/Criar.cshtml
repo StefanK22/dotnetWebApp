@@ -54,6 +54,7 @@
                 <option value="Top de Anuncios 7">Top de Anuncios 7</option>
                 <option value="Top de Anuncios 28">Top de Anuncios 28</option>
                 <option value="1ª Página">1ª Página</option>
+                <option value="Outro">Outro</option>
             </select>
         </div>
     </div>
@@ -92,11 +93,11 @@
                         {
                             @if (anuncio.Id == @Model.destaque.Anuncio)
                             {
-                                <option value="@anuncio.Id" selected>@anuncio.Titulo</option>
+                                <option value="@anuncio.Id" selected>@anuncio.Id - @anuncio.Titulo</option>
                             }
                             else
                             {
-                                <option value="@anuncio.Id">@anuncio.Titulo</option>
+                                <option value="@anuncio.Id">@anuncio.Id - @anuncio.Titulo</option>
                             }
                         }
                     }
@@ -124,7 +125,7 @@
             <button type="submit" class="btn btn-primary">Submeter</button>
         </div>
         <div class="col-sm-3 d-grid">
-            <a class="btn btn-outline-primary" href="/Compras" role="button">Cancelar</a>
+            <a class="btn btn-outline-primary" href="/Destaques" role="button">Cancelar</a>
         </div>
     </div>
 </form>

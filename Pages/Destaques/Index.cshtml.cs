@@ -14,6 +14,7 @@ namespace Sales.Pages.Destaques
     {
 
         public List<Destaque> destaquesList = new List<Destaque>();
+        public string Total;
 
         public void OnGet()
         {
@@ -25,9 +26,24 @@ namespace Sales.Pages.Destaques
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM destaque ORDER BY Id";
+                    string sql = "SELECT SUM(custo) FROM destaque;";
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        try {
+                            Total = reader.GetDouble(0).ToString() + "€";
+                        }
+                        catch (System.Exception)
+                        {
+                            Total = "0.00€";   
+                        }
+                    }
+                    connection.Close();
+                    connection.Open();
+                    sql = "SELECT * FROM destaque ORDER BY Id";
+                    command = new NpgsqlCommand(sql, connection);
+                    reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         Destaque destaque = new Destaque();

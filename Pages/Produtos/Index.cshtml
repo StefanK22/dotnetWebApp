@@ -79,7 +79,7 @@
     <tbody>
         @foreach (var produto in Model.produtosList)
         {
-            <tr data-href="/Produtos/Editar?id=@produto.Nome">
+            <tr data-href="/Produtos/Editar?nome=@produto.Nome">
                 <td>@produto.Nome</td>
                 <td>@produto.Descr</td>
                 <td>
