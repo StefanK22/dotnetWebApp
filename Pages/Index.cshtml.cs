@@ -20,7 +20,8 @@ public class IndexModel : PageModel
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                string sql = "SELECT SUM(preco) - (SELECT SUM(preco) + (SELECT SUM(custo) FROM destaque) FROM compra) FROM venda;";
+                string sql = "SELECT ROUND((SUM(preco) - (SELECT SUM(preco) + (SELECT SUM(custo) "
+                        + "FROM destaque) FROM compra))::numeric , 2) FROM venda;";
                 NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())

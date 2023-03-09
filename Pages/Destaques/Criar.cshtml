@@ -76,7 +76,7 @@
                         using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                         {
                             connection.Open();
-                            string sql = "SELECT * FROM anuncio";
+                            string sql = "SELECT * FROM anuncio ORDER BY Id";
                             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                             NpgsqlDataReader reader = command.ExecuteReader();
                             while (reader.Read()){

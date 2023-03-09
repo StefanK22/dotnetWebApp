@@ -44,7 +44,7 @@ namespace Sales.Pages.Compras
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT SUM(preco) FROM compra;";
+                    string sql = "SELECT ROUND(SUM(preco)::numeric, 2) FROM compra;";
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())

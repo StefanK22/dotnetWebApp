@@ -26,7 +26,7 @@ namespace Sales.Pages.Vendas
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT SUM(preco) FROM venda;";
+                    string sql = "SELECT ROUND(SUM(preco)::numeric, 2) FROM venda;";
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())

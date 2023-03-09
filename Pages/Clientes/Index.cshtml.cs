@@ -23,7 +23,7 @@ namespace Sales.Pages.clientes
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM cliente FULL OUTER JOIN (SELECT cliente, SUM(preco) AS vendas FROM venda GROUP BY cliente) AS c ON c.cliente = cliente.id ORDER BY id";
+                    string sql = "SELECT * FROM cliente FULL OUTER JOIN (SELECT cliente, ROUND(SUM(preco)::numeric, 2) AS vendas FROM venda GROUP BY cliente) AS c ON c.cliente = cliente.id ORDER BY id";
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
